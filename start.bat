@@ -44,16 +44,26 @@ if exist "Pipfile" (
     pipenv install
 )
 
+echo [PHASE 4] Verifying file integrity...
+pipenv run python integrity.py
+if %errorlevel% neq 0 (
+    echo [CRITICAL] Integrity check failed.
+    pause
+    exit /b 1
+)
+
 echo. > src/.setup_done
 echo [SUCCESS] Environment is ready.
 timeout /t 2 >nul
 
 :run_script
 cls
-:: Read version from src/version
 set "ver_val=Unknown"
-if exist "src\version" (
-    set /p ver_val=<"src\version"
+if exist "version.json" (
+    for /f "tokens=2 delims=:," %%a in ('findstr "version" version.json') do (
+        set "ver_val=%%a"
+        set "ver_val=!ver_val: =!"
+    )
 )
 
 echo      _____          __  .__  .__          __  .__           ___________            .__          
@@ -88,7 +98,7 @@ if "%menu%"=="2" (
 )
 if "%menu%"=="3" (
     echo [RUN] Checking for updates...
-    pipenv run python src/update.py
+    pipenv run python src/updater.py
     pause
     goto :run_script
 )
