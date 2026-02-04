@@ -36,13 +36,14 @@ def generate_manifest(suffix):
     print(f"[SUCCESS] Created manifest.md5 in data directory.")
 
 def get_platform():
-    versionpath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "version"))
+    versionpath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "data", "version"))
     try:
         with open(versionpath, 'r') as file:
             lines = file.readlines()
             return lines[1]
     except Exception as e:
         print(e)
+        return None
 
 if __name__ == "__main__":
-    generate_manifest(get_platform())
+    generate_manifest(str(get_platform()).rstrip('\n'))
