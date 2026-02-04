@@ -1,6 +1,5 @@
 import hashlib
 import os
-import json
 
 def check_integrity(manifest_name):
     """Check the integrity of files against the existing MD5 manifest."""
@@ -23,22 +22,18 @@ def check_integrity(manifest_name):
             current_hash = md5.hexdigest()
 
             if current_hash == expected_hash:
-                print(f"[SUCCESS] {file_path} integrity verified.")
+                print(f"[SUCCESS] {file_path} [{current_hash}]")
             else:
-                print(f"[WARNING] {file_path} integrity check failed: "
-                      f"expected {expected_hash}, found {current_hash}.")
+                print(f"[FAIL] {file_path} [{current_hash}]")
         else:
             print(f"[WARNING] {file_path} does not exist.")
 
 def get_platform():
+    versionpath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "version"))
     try:
-        with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "version.json")), 'r') as file:
-            data = json.load(file)
-            return data['platform']
-    except FileNotFoundError:
-        print("Error: The file 'data.json' was not found.")
-    except json.JSONDecodeError:
-        print("Error: Failed to decode JSON from the file (invalid JSON format).")
+        with open(versionpath, 'r') as file:
+            lines = file.readlines()
+            return lines[1]
     except Exception as e:
         print(e)
 

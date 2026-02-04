@@ -2,7 +2,6 @@ import hashlib
 import os
 
 def generate_manifest(suffix):
-    manifest_name = f"manifest.{suffix}.md5"
     base_path = os.path.dirname(os.path.abspath(__file__))
     hashes = []
     
@@ -14,6 +13,7 @@ def generate_manifest(suffix):
         os.path.normpath(os.path.join(base_path, "..", "Pipfile.lock")),
         os.path.normpath(os.path.join(base_path, "..", "Pipfile")),
         os.path.normpath(os.path.join(base_path, "..", "start.bat")),
+        os.path.normpath(os.path.join(base_path, "..", "LICENSE")),
     ]
     
     for file_path in files_to_hash:
@@ -24,10 +24,24 @@ def generate_manifest(suffix):
                     md5.update(chunk)
             hashes.append(f"{md5.hexdigest()} {file_path}")
 
-    with open(manifest_name, "w") as f:
+    with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dev", "manifests", f"manifest.{suffix}.md5")), "w") as f:
         f.write("\n".join(hashes))
-    print(f"[SUCCESS] Created {manifest_name} in root directory.")
+        f.close()
+    print(f"[SUCCESS] Created manifest.{suffix}.md5 in root directory.")
+
+    with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "manifest.md5")), "w") as f:
+        f.write("\n".join(hashes))
+        f.close
+    print(f"[SUCCESS] Created manifest.md5 in root directory.")
+
+def get_platform():
+    versionpath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "version"))
+    try:
+        with open(versionpath, 'r') as file:
+            lines = file.readlines()
+            return lines[1]
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
-    generate_manifest(input("> "))
- 
+    generate_manifest(get_platform())

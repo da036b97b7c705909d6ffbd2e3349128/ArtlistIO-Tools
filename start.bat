@@ -44,7 +44,7 @@ if exist "Pipfile" (
     pipenv install
 )
 
-echo [PHASE 4] Verifying file integrity...
+echo [PHASE 4] Verifying integrity of files...
 pipenv run python integrity.py
 if %errorlevel% neq 0 (
     echo [CRITICAL] Integrity check failed.
@@ -58,12 +58,10 @@ timeout /t 2 >nul
 
 :run_script
 cls
+:: Read version from src/version
 set "ver_val=Unknown"
-if exist "version.json" (
-    for /f "tokens=2 delims=:," %%a in ('findstr "version" version.json') do (
-        set "ver_val=%%a"
-        set "ver_val=!ver_val: =!"
-    )
+if exist "src\version" (
+    set /p ver_val=<"src\version"
 )
 
 echo      _____          __  .__  .__          __  .__           ___________            .__          

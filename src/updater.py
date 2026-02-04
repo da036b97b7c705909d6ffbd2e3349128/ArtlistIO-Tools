@@ -16,3 +16,4 @@ def check_remote_updates(owner, repo_name, branch='main'):
 
 if __name__ == "main":
     check_remote_updates('da036b97b7c705909d6ffbd2e3349128', 'ArtlistIO-Tools')
+    
