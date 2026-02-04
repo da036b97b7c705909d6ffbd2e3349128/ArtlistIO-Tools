@@ -3,17 +3,18 @@ import os
 
 def generate_manifest(suffix):
     base_path = os.path.dirname(os.path.abspath(__file__))
+    root_path = os.path.normpath(os.path.join(base_path, ".."))
     hashes = []
-    
+
     files_to_hash = [
-        os.path.normpath(os.path.join(base_path, "..", "src", "artlistio-vid.py")), 
-        os.path.normpath(os.path.join(base_path, "..", "src", "artlistio-sfx.py")),
-        os.path.normpath(os.path.join(base_path, "..", "src", "updater.py")),
-        os.path.normpath(os.path.join(base_path, "..", "src", "integrity.py")),
-        os.path.normpath(os.path.join(base_path, "..", "Pipfile.lock")),
-        os.path.normpath(os.path.join(base_path, "..", "Pipfile")),
-        os.path.normpath(os.path.join(base_path, "..", "start.bat")),
-        os.path.normpath(os.path.join(base_path, "..", "LICENSE")),
+        os.path.join(root_path, "src", "artlistio-vid.py"),
+        os.path.join(root_path, "src", "artlistio-sfx.py"),
+        os.path.join(root_path, "src", "updater.py"),
+        os.path.join(root_path, "src", "integrity.py"),
+        os.path.join(root_path, "Pipfile.lock"),
+        os.path.join(root_path, "Pipfile"),
+        os.path.join(root_path, "start.bat"),
+        os.path.join(root_path, "LICENSE"),
     ]
     
     for file_path in files_to_hash:

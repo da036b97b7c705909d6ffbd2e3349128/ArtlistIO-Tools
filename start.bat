@@ -45,7 +45,7 @@ if exist "Pipfile" (
 )
 
 echo [PHASE 4] Verifying integrity of files...
-pipenv run python integrity.py
+pipenv run python src/integrity.py
 if %errorlevel% neq 0 (
     echo [CRITICAL] Integrity check failed.
     pause

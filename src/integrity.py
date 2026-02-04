@@ -38,4 +38,4 @@ def get_platform():
         print(e)
 
 if __name__ == "__main__":
-    check_integrity(f"manifest.{get_platform()}.md5")
+    check_integrity(f"manifest.md5")
