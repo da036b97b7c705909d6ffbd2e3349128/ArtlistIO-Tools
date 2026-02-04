@@ -1,8 +1,7 @@
 import requests
 
 def check_remote_updates(owner, repo_name, branch='main'):
-    """Checks the latest commit SHA of a remote GitHub repository."""
-    url = f"https://api.github.com{owner}/{repo_name}/commits/{branch}"
+    url = f"https://api.github.com/repos/{owner}/{repo_name}/commits/{branch}"
 
     response = requests.get(url)
 
@@ -14,6 +13,5 @@ def check_remote_updates(owner, repo_name, branch='main'):
         print(f"Failed to retrieve information: Status code {response.status_code}")
         return None
 
-if __name__ == "main":
+if __name__ == "__main__":
     check_remote_updates('da036b97b7c705909d6ffbd2e3349128', 'ArtlistIO-Tools')
-    
