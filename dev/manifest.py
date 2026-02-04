@@ -28,12 +28,12 @@ def generate_manifest(suffix):
     with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "dev", "manifests", f"manifest.{suffix}.md5")), "w") as f:
         f.write("\n".join(hashes))
         f.close()
-    print(f"[SUCCESS] Created manifest.{suffix}.md5 in root directory.")
+    print(f"[SUCCESS] Created manifest.{suffix}.md5 in dev directory.")
 
-    with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "manifest.md5")), "w") as f:
+    with open(os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "data", "manifest.md5")), "w") as f:
         f.write("\n".join(hashes))
         f.close
-    print(f"[SUCCESS] Created manifest.md5 in root directory.")
+    print(f"[SUCCESS] Created manifest.md5 in data directory.")
 
 def get_platform():
     versionpath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "version"))
