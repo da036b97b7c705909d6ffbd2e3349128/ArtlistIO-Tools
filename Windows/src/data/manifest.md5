@@ -1,7 +1,7 @@
-27aa63ec1612cf4290b92be0d5aabe3e C:\Users\foras\Downloads\ArtlistIO-Tools\src\artlistio-vid.py
-1a6b88e3936bda2968a74fe3e5097d8c C:\Users\foras\Downloads\ArtlistIO-Tools\src\artlistio-sfx.py
-fb8288b934e320f1d74a6617a5f19f11 C:\Users\foras\Downloads\ArtlistIO-Tools\src\updater.py
-eaf0263518178ca79a79d448cd739440 C:\Users\foras\Downloads\ArtlistIO-Tools\src\integrity.py
-275e1768f0843dad5aac0d04c3828ce5 C:\Users\foras\Downloads\ArtlistIO-Tools\Pipfile.lock
-c53c2292d4b372171bcc0f951b2ebe16 C:\Users\foras\Downloads\ArtlistIO-Tools\Pipfile
-d3c18fca0122ea8e12f8b051bd8161fc C:\Users\foras\Downloads\ArtlistIO-Tools\start.bat
+27aa63ec1612cf4290b92be0d5aabe3e src\artlistio-vid.py
+1a6b88e3936bda2968a74fe3e5097d8c src\artlistio-sfx.py
+fb8288b934e320f1d74a6617a5f19f11 src\updater.py
+eaf0263518178ca79a79d448cd739440 src\integrity.py
+275e1768f0843dad5aac0d04c3828ce5 Pipfile.lock
+acd84d4540bbc6f65bb044332c93966d Pipfile
+d3c18fca0122ea8e12f8b051bd8161fc start.bat
