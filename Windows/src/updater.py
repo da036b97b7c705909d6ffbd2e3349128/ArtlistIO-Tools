@@ -65,4 +65,4 @@ if __name__ == "__main__":
         print(f"New version found: {remote_tag} (Current: {local_tag})")
         run_update(zip_url, remote_tag)
     else:
-        print("Software is up to date.")
+        print("ArtlistIO Tools are up to date.")

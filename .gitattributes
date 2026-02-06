@@ -1,1 +1,1 @@
-src/dependencies/** filter=lfs diff=lfs merge=lfs -text
+Windows/src/dependencies/** filter=lfs diff=lfs merge=lfs -text
