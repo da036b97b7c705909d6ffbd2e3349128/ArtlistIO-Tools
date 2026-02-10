@@ -1,0 +1,10 @@
+89b3f725fa70ba069249037d5ec986db Pipfile
+8134864bd1f74f2e863e33f010373be9 Pipfile.lock
+7fb67ca4ededc07be6111caa07977958 readme.txt
+a82aa12e3bb156959b6470111a8f8a98 src/artlistio-sfx.py
+c61fe045afd4040d72dd84c7de1a4a86 src/artlistio-vid.py
+edef41133864798cfff0517395acd1ea src/data/LICENSE
+720a61dde6c440f6337233e1dafd6196 src/data/version
+6730e5436a9b3fc44d5dc1e9a0b6f103 src/integrity.py
+c8270c9fb370e6fa964c1d52ead522a9 src/updater.py
+3250c49805ac42f8f75edeb2e1b1fc58 start.sh

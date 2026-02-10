@@ -38,19 +38,22 @@ if %errorlevel% neq 0 (
 )
 
 echo [PHASE 3] Configuring Python dependencies...
-pip install --quiet pipenv
+py -m pip install --quiet pipenv
 if exist "Pipfile" (
-    echo [INFO] Running pipenv install...
-    py -m pip install pipenv
+    echo [INFO] Installing dependencies from Pipfile...
     pipenv install
+) else (
+    echo [INFO] Creating new environment and installing streamlink...
+    pipenv install streamlink playwright
 )
+pipenv run python -m playwright install chromium
 
 echo [PHASE 4] Verifying integrity of files...
 pipenv run python src/integrity.py
 if %errorlevel% neq 0 (
-    echo [CRITICAL] Integrity check failed.
-    pause
-    exit /b 1
+    echo [91m[CRITICAL] Integrity check failed.[0m
+    set /p cont="Continue anyway? (Experimental Build) (y/n): "
+    if /i "!cont!" neq "y" exit /b 1
 )
 
 echo. > src/.setup_done
@@ -59,7 +62,6 @@ timeout /t 2 >nul
 
 :run_script
 cls
-:: Read version from src/version
 set "ver_val=Unknown"
 if exist "src\data\version" (
     set /p ver_val=<"src\data\version"
@@ -67,10 +69,10 @@ if exist "src\data\version" (
 
 echo [93m
 echo       _____          __  .__  .__          __  .__           ___________            .__          
-echo      /  _  \________/  ^|_^|  ^| ^|__^| _______/  ^|_^|__^| ____     \__    ___/___   ____ ^|  ^|   ______ 
-echo     /  /_\  \_  __ \   __\  ^| ^|  ^|/  ___/\   __\  ^|/  _ \      ^|    ^| /  _ \ /  _ \^|  ^|  /  ___/ 
-echo    /    ^|    \  ^| \/^|  ^| ^|  ^|_^|  ^|\___ \  ^|  ^| ^|  ^|  ^<_^> )     ^|    ^|(  ^<_^> ^|  ^<_^> )  ^|__\___ \  
-echo    \____^|__  /__^|   ^|__^| ^|____/__/____  ^> ^|__^| ^|__^|\____/      ^|____^| \____/ \____/^|____/____  ^> 
+echo      /  _  \________/  |_|  | |__| _______/  |_|__| ____     \__    ___/___   ____ |  |   ______ 
+echo     /  /_\  \_  __ \   __\  | |  |/  ___/\   __\  |/  _ \      |    | /  _ \ /  _ \|  |  /  ___/ 
+echo    /    |    \  | \/|  | |  |_|  |\___ \  |  | |  |  <_> )     |    |(  <_> |  <_> )  |__\___ \  
+echo    \____|__  /__|   |__| |____/__/____  > |__| |__|\____/      |____| \____/ \____/|____/____  > 
 echo            \/                         \/                                                     \/  
 echo                                     [96mAuthor: Mu_rpy[0m
 echo                                     [92mVersion: %ver_val%[0m

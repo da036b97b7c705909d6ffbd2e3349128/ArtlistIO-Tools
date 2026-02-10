@@ -1,7 +1,9 @@
-27aa63ec1612cf4290b92be0d5aabe3e src\artlistio-vid.py
-d4b49662909517ca8d0ccc2f6121cead src\artlistio-sfx.py
-3503273c27974b2099c62f761f3dd794 src\updater.py
-eaf0263518178ca79a79d448cd739440 src\integrity.py
-275e1768f0843dad5aac0d04c3828ce5 Pipfile.lock
-9b455a19bf79ae7559be6a438b3c7b88 Pipfile
-178ead26ec1fce824c2f7e082ed9f7ba start.bat
+7f59b7e44938eea6ae2ce1c2d10f694a Pipfile
+957ad9aec01ffbe4f9bb0824c6c9efc6 Pipfile.lock
+0086029b0f2ce25e40ea8c6bf2b608e2 start.bat
+051725937425e9191931f3bbe4243746 src/artlistio-sfx.py
+e9483723c9d8896ce789299b6dbc083b src/artlistio-vid.py
+88df7fb3a40a2c5e7aceaa968c6e0e81 src/integrity.py
+1343d143a8e90057671910a3149b38c2 src/updater.py
+edef41133864798cfff0517395acd1ea src/data/LICENSE
+ec1047a8f526936b1b578de7eb89e8eb src/data/version
