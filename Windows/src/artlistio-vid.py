@@ -1,19 +1,15 @@
 import asyncio
+import re
 import os
-import struct
 import subprocess
 from playwright.async_api import async_playwright
 
 async def get_m3u8_link(target_url):
-    arch = "64" if struct.calcsize("P") == 8 else "32"
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    chrome_path = os.path.join(base_dir, "dependencies", f"chrome-win{arch}", "chrome.exe")
-
     found_event = asyncio.Event()
     m3u8_url = None
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True, executable_path=chrome_path)
+        browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         )
@@ -42,46 +38,48 @@ async def get_m3u8_link(target_url):
                     except asyncio.TimeoutError:
                         continue
         finally:
-            for task in [nav_task, wait_task]:
-                if not task.done():
-                    task.cancel()
             await browser.close()
             
     return m3u8_url
 
-def convert_m3u8(url):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.normpath(os.path.join(base_path, "..", "output"))
+def download_with_streamlink(url, target_url):
+    output_dir = os.path.normpath(os.path.join(os.getcwd(), "output", "videos"))
+    os.makedirs(output_dir, exist_ok=True)
+
+    match = re.search(r'/(?:song|track|sfx|clip)/(.*?)/(?:\d+)', target_url)
+    default_name = match.group(1).split('/')[-1] if match else "latest"
+
+    name = input(f"Enter output filename (default: {default_name}.mp4): ").strip()
+    if not name: 
+        name = default_name
     
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    ffmpeg_path = os.path.join(base_path, "dependencies", "ffmpeg", "bin", "ffmpeg.exe")
-    name = input("Enter output filename: ").strip()
-
-    if not name.endswith(".mp4"):
+    if not name.lower().endswith(".mp4"):
         name += ".mp4"
-
+    
     output_file = os.path.join(output_dir, name)
+    ffmpeg_exe = os.path.abspath(os.path.join(os.path.dirname(__file__), "ffmpeg.exe"))
 
     command = [
-        ffmpeg_path,
-        "-i", url,
-        "-c", "copy",
-        "-bsf:a", "aac_adtstoasc",
-        output_file
+        "streamlink",
+        "--ffmpeg-ffmpeg", ffmpeg_exe,
+        url, "best",
+        "-o", output_file,
+        "--force"
     ]
 
     try:
         subprocess.run(command, check=True)
-        print(f"Success: {output_file}")
+        print(f"\n[SUCCESS] Video saved to: {output_file}")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"\n[ERROR] Streamlink failed: {e}")
 
 if __name__ == "__main__":
-    target = input("Enter the website URL: ").strip()
-    found_url = asyncio.run(get_m3u8_link(target))
-    if found_url:
-        convert_m3u8(found_url)
-    else:
-        print('Unable to retrieve m3u8 url.')
+    target = input("Enter Artlist Video URL: ").strip()
+    if target:
+        print("[INFO] Searching for stream...")
+        found_url = asyncio.run(get_m3u8_link(target))
+        if found_url:
+            print("[INFO] Stream found. Starting download...")
+            download_with_streamlink(found_url, target)
+        else:
+            print("[ERROR] Could not find video stream.")

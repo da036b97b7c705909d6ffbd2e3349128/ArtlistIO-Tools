@@ -3,7 +3,7 @@
 ============================================================
 
 Author: Mu_rpy
-Version: artlistio-tools-v1.3
+Version: artlistio-tools-v1.2
 
 --- QUICK START ---
 

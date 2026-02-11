@@ -20,8 +20,9 @@ def check_latest_release(owner, repo):
             data = r.json()
             tag = data.get("tag_name")
             assets = data.get("assets", [])
-            if assets:
-                return tag, assets[0].get("browser_download_url")
+            for asset in assets:
+                if "win" in asset.get("name").lower():
+                    return tag, asset.get("browser_download_url")
     except Exception:
         pass
     return None, None
@@ -39,12 +40,11 @@ def run_update(dl_url, new_tag):
 
         with open("finish_update.bat", "w") as f:
             f.write(f"""@echo off
-timeout /t 2 /nobreak > nul
+timeout /t 3 /nobreak > nul
+del /f /q "src\\data\\.setup_done"
 xcopy /s /y "update_temp\\*" "."
 rd /s /q "update_temp"
 echo Update complete.
-pause
-del src/data/.setup_done
 start start.bat
 del "%~f0"
 """)
