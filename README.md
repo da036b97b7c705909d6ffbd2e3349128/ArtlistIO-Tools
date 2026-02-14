@@ -12,21 +12,22 @@ ArtlistIO is a simple tool to extract and convert `.m3u8` streams from websites 
 > By continuing to use this, you accept the risks, and acknowledge that you have been warned.
 
 
-## Usage (Windows)
+## Usage
 
+**Windows**
 To start the application, run the provided `start.bat`.
 
-## Usage (Linux/MacOS)
+**Linux/MacOS**
 
 # Curl (Recommended)
 Run this command in your terminal:
 ```bash
-curl -LJO $(curl -s https://api.github.com/repos/da036b97b7c705909d6ffbd2e3349128/ArtlistIO-Tools/releases/latest | grep -o "https://.*linux.zip") && unzip linux.zip && chmod +x start.sh && ./start.sh
+mkdir artlist-tools && cd artlist-tools && curl -LJO $(curl -s https://api.github.com/repos/da036b97b7c705909d6ffbd2e3349128/ArtlistIO-Tools/releases/latest | grep -o "https://.*linux.zip") && unzip linux.zip && chmod +x start.sh && ./start.sh
 ```
 
 # Downloading zip file
 If you have already downloaded the ZIP file, open the terminal inside the file's directory and run:
-Run `unzip linux.zip && chmod +x start.sh && ./start.sh`
+Run `mkdir artlist-tools && cd artlist-tools && unzip linux.zip && chmod +x start.sh && ./start.sh`
 
 ## Features
 
@@ -40,6 +41,7 @@ Run `unzip linux.zip && chmod +x start.sh && ./start.sh`
 [License](LICENSE)
 
 Mu_rpy © 2026
+
 
 
 
