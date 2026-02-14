@@ -1,8 +1,11 @@
 ﻿# ArtlistIO Tools
-ArtlistIO is a simple tool to extract and convert `.m3u8` streams from websites to MP4 using FFmpeg and Playwright.  
+ArtlistIO is a simple tool to extract and convert `.m3u8` streams from websites to MP4 using FFmpeg and Playwright.
+
+> [!NOTE]
+> While this may/may not work for ArtlistIO, most stock-footage sites follow the same format, so it should theoretically work for other sites.
 
 > [!CAUTION]
-> If you dont want to be held responsible for pirating stock footage, buy an artlist.io license at [their plans and pricing page](https://artlist.io/page/pricing/max).
+> If you dont want to be held responsible for pirating stock footage, buy an artlist.io (or any provider) license at [their plans and pricing page](https://artlist.io/page/pricing/max).
 > You are adviced to  [terms of service](https://artlist.io/help-center/privacy-terms/terms-of-use/) and understand how you are violating them.
 
 > [!WARNING]
@@ -37,7 +40,6 @@ Run `mkdir artlist-tools && cd artlist-tools && unzip linux.zip && chmod +x star
 - ArtlistIO Stock Footage Downloader (4k, HD, 720p, 380p, 240p).
 - ArtlistIO SFX/Music Footage Downloader (custom bitrate supported).
 - Update option in UI.
-- 👍
 
 
 &nbsp;
@@ -47,6 +49,7 @@ Run `mkdir artlist-tools && cd artlist-tools && unzip linux.zip && chmod +x star
 [License](LICENSE)
 
 Mu_rpy © 2026
+
 
 
 
