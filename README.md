@@ -1,5 +1,5 @@
 ﻿# ArtlistIO Tools
-ArtlistIO is a simple tool to extract and convert `.m3u8` streams from websites to MP4 using FFmpeg and Playwright.
+A simple tool to intercept and extract `.m3u8` or `.aac` streams from websites, and convert them to MP4/MP3 using FFmpeg and Playwright.
 
 > [!NOTE]
 > While this may/may not work for ArtlistIO, most stock-footage sites follow the same format, so it should theoretically work for other sites.
@@ -15,20 +15,21 @@ ArtlistIO is a simple tool to extract and convert `.m3u8` streams from websites 
 
 &nbsp;
 
+
 ## Usage
 
-- **Windows**
+### Windows
 To start the application, run the provided `start.bat`.
 
-- **Linux/MacOS**
+### Linux/MacOS
 
-# Curl (Recommended)
+- *Curl (Recommended)*
 Run this command in your terminal:
 ```bash
 mkdir artlist-tools && cd artlist-tools && curl -LJO $(curl -s https://api.github.com/repos/da036b97b7c705909d6ffbd2e3349128/ArtlistIO-Tools/releases/latest | grep -o "https://.*linux.zip") && unzip linux.zip && chmod +x start.sh && ./start.sh
 ```
 
-# Downloading zip file
+- *Downloading zip file*
 If you have already downloaded the ZIP file, open the terminal inside the file's directory and run:
 Run `mkdir artlist-tools && cd artlist-tools && unzip linux.zip && chmod +x start.sh && ./start.sh`
 
@@ -49,6 +50,7 @@ Run `mkdir artlist-tools && cd artlist-tools && unzip linux.zip && chmod +x star
 [License](LICENSE)
 
 Mu_rpy © 2026
+
 
 
 
